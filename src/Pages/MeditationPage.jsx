@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../Supabase/supabaseClient";
-import { MagicCard } from "@/Components/magicui/magic-card";
 import { BorderBeam } from "@/Components/magicui/border-beam";
 
 function MeditationPage({
