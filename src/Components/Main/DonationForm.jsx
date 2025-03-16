@@ -8,7 +8,7 @@ import {
 import { CreditCard, LockIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import CurrencySelector from "./CurrencySelector";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Button } from '../Components/ui/button';
+import { Button } from '../Components/ui/Button';
 import { supabase } from '../Supabase/supabaseClient'; // Ensure you have this setup
 import { quotes } from '../Data/Quotes'; // Import the quotes
-import { Ripple } from '@/Components/magicui/ripple';
+
 
 const initialMeditations = [
   {
