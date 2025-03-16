@@ -1,0 +1,148 @@
+/* Adding a fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply animation to the image */
+/* Apply animation to the image */
+.img-fade-loop {
+  animation: fadeInOut 7s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+  background-clip: text;
+  color: transparent;
+}
+
+
+@keyframes neon-border {
+  0% {
+    border-color: rgba(178, 126, 206, 0.5);
+    box-shadow: 0 0 8px rgba(178, 126, 206, 0.8);
+  }
+  50% {
+    border-color: rgba(220, 115, 115, 0.7);
+    box-shadow: 0 0 12px rgba(220, 115, 115, 0.9);
+  }
+  100% {
+    border-color: rgba(178, 126, 206, 0.5);
+    box-shadow: 0 0 8px rgba(178, 126, 206, 0.8);
+  }
+}
+
+.focus\:before\:animate-neon-border:focus:before {
+  animation: neon-border 1.2s infinite alternate ease-in-out;
+}
+
+
+/* LOADER */
+
+
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 10rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  animation: pulsOut 1.7s ease-in-out infinite;
+  filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+}
+.loader:before {
+  width: 100%;
+  padding-bottom: 100%;
+  box-shadow: inset 0 0 0 1rem #fff;
+  animation-name: pulsIn;
+}
+.loader:after {
+  width: calc(100% - 2rem);
+  padding-bottom: calc(100% - 2rem);
+  box-shadow: 0 0 0 0 #fff;
+}
+
+@keyframes pulsIn {
+  0% {
+    box-shadow: inset 0 0 0 1rem #fff;
+    opacity: 1;
+  }
+  50%, 100% {
+    box-shadow: inset 0 0 0 0 #fff;
+    opacity: 0;
+  }
+}
+
+@keyframes pulsOut {
+  0%, 50% {
+    box-shadow: 0 0 0 0 #fff;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 1rem #fff;
+    opacity: 1;
+  }
+}
+    
+
+
+
+
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+
+
