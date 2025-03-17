@@ -8,7 +8,6 @@ import {
 import { CreditCard, LockIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import CurrencySelector from "./CurrencySelector";
-import { Button } from "../ui/Button";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -55,8 +54,8 @@ const DonationForm = () => {
 
   const handleRedirect = () => {
     resetForm();
-    navigate("/home")
-  }
+    navigate("/home");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,15 +126,12 @@ const DonationForm = () => {
           <h2 className="text-3xl font-bold text-white mb-4">
             Thank You for Your Contribution! 🎉
           </h2>
-          <Button
-            type="button"
-            variant="love"
+          <button
             onClick={handleRedirect}
-            size="lg"
-            className="bg-white text-orange-900 hover:scale-102 cursor-pointer transition-all"
+            className="px-4 py-2 cursor-pointer rounded bg-white text-orange-900 hover:scale-102  transition-all hover:text-[#301C3B] hover:bg-[#F3F3B7]"
           >
-           Go to home
-          </Button>
+            Go to home
+          </button>
         </motion.div>
       </section>
     );

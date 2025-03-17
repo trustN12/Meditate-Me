@@ -1,117 +1,119 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Button } from '../Components/ui/Button';
-import { supabase } from '../Supabase/supabaseClient'; // Ensure you have this setup
-import { quotes } from '../Data/Quotes'; // Import the quotes
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
+import { supabase } from "../Supabase/supabaseClient"; // Ensure you have this setup
+import { quotes } from "../Data/Quotes"; // Import the quotes
 
 const initialMeditations = [
   {
+    id: 1,
     duration: 73,
-    title: 'Shiva Meditation',
-    description: 'Perfect for a mindful pause',
-    path: '/shiva-meditation',
-    filename: 'shiva-8623105.jpg',
+    title: "Shiva Meditation",
+    description: "Perfect for a mindful pause",
+    path: "/shiva-meditation",
+    filename: "shiva-8623105.jpg",
   },
   {
+    id: 2,
     duration: 68,
-    title: 'Krishna Meditation',
-    description: 'Ideal for stress relief and centering',
-    path: '/krishna-meditation',
-    filename: 'KRISHNA.jpg',
+    title: "Krishna Meditation",
+    description: "Ideal for stress relief and centering",
+    path: "/krishna-meditation",
+    filename: "KRISHNA.jpg",
   },
   {
+    id: 3,
     duration: 61,
-    title: 'Buddha Meditation',
-    description: 'Complete relaxation and mindfulness practice',
-    path: '/buddha-meditation',
-    filename: 'Buddha.jpg',
+    title: "Buddha Meditation",
+    description: "Complete relaxation and mindfulness practice",
+    path: "/buddha-meditation",
+    filename: "Buddha.jpg",
   },
   {
+    id: 4,
     duration: 60,
-    title: 'Sun Meditation',
-    description: 'Ancient Sun mantra',
-    path: '/sun-meditation',
-    filename: 'Sun.jpg',
+    title: "Sun Meditation",
+    description: "Ancient Sun mantra",
+    path: "/sun-meditation",
+    filename: "Sun.jpg",
   },
   {
+    id: 5,
     duration: 63,
-    title: 'Formless Shiva',
-    description: 'The Nirvana Shatkam - The Formless Shiva Meditation',
-    path: '/formless_shiva-meditation',
-    filename: 'Formless Shiva.jpg',
+    title: "Formless Shiva",
+    description: "The Nirvana Shatkam - The Formless Shiva Meditation",
+    path: "/formless_shiva-meditation",
+    filename: "Formless Shiva.jpg",
   },
   {
+    id: 6,
     duration: 62,
-    title: 'Cosmic Creation',
-    description: 'The vastness of interstellar space',
-    path: '/cosmic-creation',
-    filename: 'Cosmic Creation.jpg',
+    title: "Cosmic Creation",
+    description: "The vastness of interstellar space",
+    path: "/cosmic-creation",
+    filename: "Cosmic Creation.jpg",
   },
   {
+    id: 7,
     duration: 183,
-    title: 'Ramaskandam Hanumantham',
-    description: 'Eliminate negativity - Body relaxation',
-    path: '/ramaskandam-hanumantham',
-    filename: 'Hanuman Mantra.jpg',
+    title: "Ramaskandam Hanumantham",
+    description: "Eliminate negativity - Body relaxation",
+    path: "/ramaskandam-hanumantham",
+    filename: "Hanuman Mantra.jpg",
   },
   {
+    id: 8,
     duration: 71,
-    title: 'Shiva seven sacred chants',
-    description: 'This ancient mantra will transform your life in just 7 days',
-    path: '/7-sacred chants',
-    filename: '7-sacred-shiva.jpg',
+    title: "Shiva seven sacred chants",
+    description: "This ancient mantra will transform your life in just 7 days",
+    path: "/7-sacred chants",
+    filename: "7-sacred-shiva.jpg",
   },
   {
+    id: 9,
     duration: 62,
-    title: 'Guiding Lights',
-    description: 'Deep healing music - eliminates stress, anxiety and calms the mind',
-    path: '/guiding-lights',
-    filename: 'guiding-lights.jpg',
+    title: "Guiding Lights",
+    description:
+      "Deep healing music - eliminates stress, anxiety and calms the mind",
+    path: "/guiding-lights",
+    filename: "guiding-lights.jpg",
   },
   {
+    id: 10,
     duration: 70,
-    title: '3:30AM Powerful Mantra',
-    description: '3:30AM brahma muhurta powerful mantra - energy, inner peace & deep state',
-    path: '/3:30am-brahma-muhurta-mantra',
-    filename: '3am.jpg',
+    title: "3:30AM Powerful Mantra",
+    description:
+      "3:30AM brahma muhurta powerful mantra - energy, inner peace & deep state",
+    path: "/3:30am-brahma-muhurta-mantra",
+    filename: "3am.jpg",
   },
   {
+    id: 11,
     duration: 61,
-    title: 'Relaxing Piano',
-    description: 'Relax with 10 soothing piano pieces by Ludovico Einaudi',
-    path: '/ludovico-einaudi-piano-10',
-    filename: 'piano.jpg',
+    title: "Relaxing Piano",
+    description: "Relax with 10 soothing piano pieces by Ludovico Einaudi",
+    path: "/ludovico-einaudi-piano-10",
+    filename: "piano.jpg",
   },
-  
 ];
 
 function Home() {
   const [meditations, setMeditations] = useState(initialMeditations);
   const [currentQuote, setCurrentQuote] = useState(quotes[0]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
-      const updatedMeditations = await Promise.all(
-        initialMeditations.map(async (meditation) => {
-          const { data, error } = await supabase
-            .storage
-            .from('assets')
-            .getPublicUrl(meditation.filename);
-          
-          if (error) {
-            console.error('Error fetching image URL:', error);
-          }
-
-          return {
-            ...meditation,
-            image: data?.publicUrl || '',
-          };
-        })
-      );
+      const updatedMeditations = initialMeditations.map((meditation) => {
+        const { data } = supabase.storage
+          .from("assets")
+          .getPublicUrl(meditation.filename);
+        return { ...meditation, image: data.publicUrl };
+      });
 
       setMeditations(updatedMeditations);
+      setLoading(false); // ✅ Stop loading
     };
 
     fetchImages();
@@ -145,7 +147,7 @@ function Home() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {meditations.map((meditation, index) => (
           <motion.div
-            key={meditation.duration}
+            key={meditation.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -168,19 +170,33 @@ function Home() {
             <div className="card-body">
               <h2 className="card-title text-2xl">{meditation.title}</h2>
               <p className="text-gray-600">{meditation.description}</p>
-              <p className="text-indigo-600 font-semibold">{meditation.duration} minutes</p>
+              <p className="text-indigo-600 font-semibold">
+                {meditation.duration} minutes
+              </p>
 
               <div className="card-actions justify-between items-center mt-4">
                 <Link to={meditation.path}>
-                  <Button className="btn-primary cursor-pointer">
+                  <button className="bg-slate-950 text-white px-4 py-2 rounded-xl hover:bg-slate-700 cursor-pointer">
                     Begin Session
-                  </Button>
+                  </button>
                 </Link>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {loading ? (
+        <p className="text-center text-gray-500">Loading meditations...</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {meditations.map((meditation) => (
+            <motion.div key={meditation.id}>
+              {/* Your meditation card */}
+            </motion.div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

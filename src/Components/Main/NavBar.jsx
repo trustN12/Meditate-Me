@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { SignedIn, SignedOut, SignIn, UserButton } from "@clerk/clerk-react";
-import { Flower2, Flower2Icon, HomeIcon } from "lucide-react";
-import { FaCoffee, FaDonate, FaOm, FaPeace } from "react-icons/fa";
+import { Flower2, HomeIcon } from "lucide-react";
+import { FaCoffee, FaOm, FaPeace } from "react-icons/fa";
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
