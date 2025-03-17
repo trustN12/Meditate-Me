@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import CurrencySelector from "./CurrencySelector";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { FaCoffee } from "react-icons/fa";
 
 const DonationForm = () => {
   const [amount, setAmount] = useState("100");
@@ -138,17 +139,20 @@ const DonationForm = () => {
   }
 
   return (
-    <section className="flex justify-center items-center min-h-screen bg-gradient-to-r from-">
+    <section className="flex justify-center items-center min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="glass-card max-w-4xl rounded-2xl p-8 md:p-10 shadow-xl"
+        className="glass-card max-w-5xl rounded-2xl p-8 md:p-10 shadow-xl bg-slate-900"
       >
         <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold text-white">Buy me a coffee</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto mt-2">
-            Your contribution helps us spread mindfulness and peace. Every
+         <div className="text-center flex justify-center items-center gap-x-3.5">
+         <h2 className="text-4xl font-bold text-[#F3F3B7]">Buy me a coffee </h2>
+         <FaCoffee size={40} className="text-[#F3F3B7] text-4xl" />
+         </div>
+          <p className="text-gray-400 max-w-2xl mx-auto mt-2">
+            Your contribution helps me spread mindfulness and peace. Every
             contribution, no matter the size, makes a difference.
           </p>
         </div>
